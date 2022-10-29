@@ -1,17 +1,17 @@
 import Vue from 'vue'
-import VeeValidate, {Validator} from 'vee-validate'
+import VeeValidate, { Validator } from 'vee-validate'
 
 const dictionary = {
   en: {
     custom: {
       password_confirmation: {
-        confirmed: () => 'The password confirmation does not match'
-      }
+        confirmed: () => 'The password confirmation does not match',
+      },
     },
   },
-};
+}
 
-Validator.localize(dictionary);
+Validator.localize(dictionary)
 
 Vue.use(VeeValidate, {
   // This is the default

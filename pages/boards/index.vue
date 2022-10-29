@@ -42,11 +42,11 @@
         </p>
         <!-- Draggable component comes from vuedraggable. It provides drag & drop functionality -->
         <draggable
+          v-model="groups"
           :list="group.tasks"
           :animation="200"
           ghost-class="ghost-card"
           group="tasks"
-          v-model="groups"
           @change="onGroupsChange($event, group)"
         >
           <!-- Each element from here will be draggable and animated. Note :key is very important here to be unique both for draggable and animations to be smooth & consistent. -->
@@ -66,10 +66,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import draggable from 'vuedraggable'
+import { createNamespacedHelpers } from 'vuex'
 import TaskCard from '~/components/TaskCard.vue'
 import { DragEvent } from '~/interfaces/DragEvent'
-import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('modules/board')
+const { mapActions } = createNamespacedHelpers('modules/board')
 
 export default Vue.extend({
   name: 'Boards',

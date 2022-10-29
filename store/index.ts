@@ -5,6 +5,7 @@ const debug = process.env.NODE_ENV !== 'production'
 
 // export default () =>
 
+// eslint-disable-next-line no-new
 new Vuex.Store({
   state: () => ({}),
   mutations: {},

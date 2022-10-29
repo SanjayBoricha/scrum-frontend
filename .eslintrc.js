@@ -13,6 +13,6 @@ module.exports = {
   plugins: ['jest'],
   // add your custom rules here
   rules: {
-    "no-console": 0
+    'no-console': 0,
   },
 }

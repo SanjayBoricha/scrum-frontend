@@ -23,7 +23,7 @@ const state = () =>
   }
 
 const getters = {
-  getGroups: (state: BoardState, getters: any, rootState: any) => {
+  getGroups: (state: BoardState, _getters: any, _rootState: any) => {
     return state.groups
   },
 }
