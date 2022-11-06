@@ -1,118 +1,117 @@
 <template>
-  <div
-    class="flex flex-col min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50"
-  >
-    <div class="mb-10">
-      <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900">
-        Register new account
-      </h2>
-      <p class="mt-2 text-center text-sm text-gray-600">
-        Already have one?&nbsp;
-        <NuxtLink
-          to="/login"
-          class="font-medium text-indigo-600 hover:text-indigo-500"
-          >login here.</NuxtLink
-        >
-      </p>
-    </div>
-    <div class="w-full max-w-md border rounded-xl p-8 shadow-md bg-white">
-      <form class="-mt-6 space-y-6" method="POST" @submit.prevent="submit">
-        <input type="hidden" name="remember" value="true" />
-        <div>
-          <div class="mb-5">
-            <label class="inline-block mb-1 font-semibold" for="name">
-              Name
-            </label>
-            <input
-              id="name"
-              v-model="name"
-              v-validate="{ required: true }"
-              name="name"
-              type="text"
-              class="relative block w-full appearance-none rounded-md border-2 border-gray-300 px-3 py-2 text-gray-900 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            />
-            <span class="text-red-500 text-sm">{{ errors.first('name') }}</span>
-          </div>
-          <div class="mb-5">
-            <label class="inline-block mb-1 font-semibold" for="email-address">
-              Email address
-            </label>
-            <input
-              id="email-address"
-              v-model="email"
-              v-validate="{ required: true, email: true }"
-              name="email"
-              type="text"
-              autocomplete="email"
-              class="relative block w-full appearance-none rounded-md border-2 border-gray-300 px-3 py-2 text-gray-900 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            />
-            <span class="text-red-500 text-sm">{{
-              errors.first('email')
-            }}</span>
-          </div>
-          <div class="mb-5">
-            <label class="inline-block mb-1 font-semibold" for="password">
-              Password
-            </label>
-            <input
-              id="password"
-              ref="password"
-              v-model="password"
-              v-validate="{ required: true }"
-              name="password"
-              type="password"
-              autocomplete="current-password"
-              class="relative block w-full appearance-none rounded-md border-2 border-gray-300 px-3 py-2 text-gray-900 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            />
-            <span class="text-red-500 text-sm">{{
-              errors.first('password')
-            }}</span>
-          </div>
-          <div class="mb-5">
-            <label class="inline-block mb-1 font-semibold" for="password">
-              Confirm Password
-            </label>
-            <input
-              id="password_confirmation"
-              v-model="password_confirmation"
-              v-validate="{ required: true, confirmed: 'password' }"
-              data-vv-as="confirm password"
-              name="password_confirmation"
-              type="password"
-              class="relative block w-full appearance-none rounded-md border-2 border-gray-300 px-3 py-2 text-gray-900 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            />
-            <span class="text-red-500 text-sm">{{
-              errors.first('password_confirmation')
-            }}</span>
-          </div>
-        </div>
+  <div class="min-vh-100 container">
+    <div class="min-vh-100 row justify-content-center align-items-center">
+      <div class="col-md-10 col-lg-6 col-xl-4 py-4">
+        <div class="card shadow border-0">
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h1 class="h4 text-gray-900 mb-4">Register</h1>
+            </div>
+            <form name="register" method="POST" @submit.prevent="submit">
+              <div class="form-group mb-3">
+                <label for="name">Name</label>
+                <input
+                  id="name"
+                  v-model="name"
+                  v-validate="{ required: true }"
+                  type="text"
+                  class="form-control"
+                  :class="{ 'is-invalid': $validator.errors.has('name') }"
+                  name="name"
+                  placeholder="Name"
+                />
+                <span class="invalid-feedback">
+                  {{ $validator.errors.first('name') }}
+                </span>
+              </div>
 
-        <div>
-          <button
-            :disabled="isSubmitting"
-            type="submit"
-            class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2.5 px-4 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            Register
-          </button>
+              <!-- email input -->
+              <div class="form-group mb-3">
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  v-model="email"
+                  v-validate="{ required: true, email: true }"
+                  type="email"
+                  class="form-control"
+                  :class="{ 'is-invalid': $validator.errors.has('email') }"
+                  name="email"
+                  placeholder="Email"
+                />
+                <span class="invalid-feedback">
+                  {{ $validator.errors.first('email') }}
+                </span>
+              </div>
+
+              <!-- password input -->
+              <div class="form-group mb-3">
+                <label for="password">Password</label>
+                <input
+                  id="password"
+                  ref="password"
+                  v-model="password"
+                  v-validate="{ required: true }"
+                  type="password"
+                  class="form-control"
+                  :class="{ 'is-invalid': $validator.errors.has('password') }"
+                  name="password"
+                  placeholder="Password"
+                />
+                <span class="invalid-feedback">
+                  {{ $validator.errors.first('password') }}
+                </span>
+              </div>
+
+              <!-- confirm password input -->
+              <div class="form-group mb-3">
+                <label for="password_confirmation">Confirm Password</label>
+                <input
+                  id="password_confirmation"
+                  v-model="password_confirmation"
+                  v-validate="{ required: true, confirmed: 'password' }"
+                  data-vv-as="confirm password"
+                  type="password"
+                  class="form-control"
+                  :class="{
+                    'is-invalid': $validator.errors.has(
+                      'password_confirmation'
+                    ),
+                  }"
+                  name="password_confirmation"
+                  placeholder="Confirm Password"
+                />
+                <span class="invalid-feedback">
+                  {{ $validator.errors.first('password_confirmation') }}
+                </span>
+              </div>
+
+              <!-- submit button -->
+              <div class="form-group mb-3">
+                <button
+                  :disabled="isSubmitting"
+                  type="submit"
+                  class="btn btn-primary w-100"
+                >
+                  Register
+                </button>
+              </div>
+
+              <p class="mb-0">
+                Already have an account login
+                <nuxt-link to="/login">here</nuxt-link>
+              </p>
+            </form>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue, { VueConstructor } from 'vue'
+import Vue from 'vue'
 
-export default (
-  Vue as VueConstructor<
-    Vue & {
-      errors: {
-        first: Function
-      }
-    }
-  >
-).extend({
+export default Vue.extend({
   name: 'Register',
   data() {
     return {
@@ -165,13 +164,9 @@ export default (
               }
 
               if (emailExists) {
-                this.$toast.error('Email already exists.', {
-                  duration: 5000,
-                })
+                this.$toast.error('Email already exists.')
               } else {
-                this.$toast.error('Something went wrong.', {
-                  duration: 5000,
-                })
+                this.$toast.error('Something went wrong.')
               }
 
               this.isSubmitting = false

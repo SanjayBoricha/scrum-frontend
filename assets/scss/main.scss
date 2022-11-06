@@ -1,3 +1,155 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+$input-btn-padding-y: 0.5rem;
+$input-btn-padding-x: 1rem;
+
+$enable-shadows: false;
+
+$input-btn-focus-box-shadow: none;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+@import 'bootstrap/scss/root';
+@import 'bootstrap/scss/reboot';
+
+@import 'bootstrap/scss/type';
+@import 'bootstrap/scss/images';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/tables';
+@import 'bootstrap/scss/forms';
+@import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/transitions';
+@import 'bootstrap/scss/dropdown';
+@import 'bootstrap/scss/button-group';
+@import 'bootstrap/scss/nav';
+@import 'bootstrap/scss/navbar'; // Requires nav
+@import 'bootstrap/scss/card';
+@import 'bootstrap/scss/breadcrumb';
+@import 'bootstrap/scss/accordion';
+@import 'bootstrap/scss/pagination';
+@import 'bootstrap/scss/badge';
+@import 'bootstrap/scss/alert';
+@import 'bootstrap/scss/progress';
+@import 'bootstrap/scss/list-group';
+@import 'bootstrap/scss/close';
+@import 'bootstrap/scss/toasts';
+@import 'bootstrap/scss/modal'; // Requires transitions
+@import 'bootstrap/scss/tooltip';
+@import 'bootstrap/scss/popover';
+@import 'bootstrap/scss/carousel';
+@import 'bootstrap/scss/spinners';
+@import 'bootstrap/scss/offcanvas'; // Requires transitions
+@import 'bootstrap/scss/placeholders';
+
+// Helpers
+@import 'bootstrap/scss/helpers';
+
+// Utilities
+
+$all-colors: map-merge-multiple(
+  $blues,
+  $indigos,
+  $purples,
+  $pinks,
+  $reds,
+  $oranges,
+  $yellows,
+  $greens,
+  $teals,
+  $cyans
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'color':
+      map-merge(
+        map-get($utilities, 'color'),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, 'color'), 'values'),
+              ($all-colors)
+            ),
+        )
+      ),
+    'background-color': (
+      property: background-color,
+      class: bg,
+      local-vars: (
+        'bg-opacity': 1,
+      ),
+      values:
+        map-merge(
+          $utilities-bg-colors,
+          map-merge(
+            $all-colors,
+            (
+              'transparent': transparent,
+            )
+          )
+        ),
+    ),
+    'font-size': (
+      rfs: true,
+      property: font-size,
+      class: fs,
+      values:
+        map-merge(
+          $font-sizes,
+          (
+            14: '14px',
+            18: '18px',
+            20: '20px',
+            24: '24px',
+          )
+        ),
+    ),
+    'margin-y': (
+      responsive: true,
+      property: margin-top margin-bottom,
+      class: my,
+      values:
+        map-merge(
+          $spacers,
+          (
+            30: 30px,
+          )
+        ),
+    ),
+  )
+);
+
+@import 'bootstrap/scss/utilities/api';
+
+html,
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: none;
+}
+
+.toasted-primary {
+  &.error {
+    background-color: $danger !important;
+  }
+
+  &.success {
+    background-color: $success !important;
+  }
+
+  &.info {
+    background-color: $info !important;
+  }
+}
+
+.navbar.navbar-dark {
+  .nav-link.nuxt-link-exact-active {
+    color: white !important;
+  }
+}

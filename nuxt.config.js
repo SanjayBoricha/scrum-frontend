@@ -27,13 +27,13 @@ export default {
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap',
       },
     ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['@/assets/scss/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -50,16 +50,34 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxt/postcss8',
   ],
+
+  build: {
+    postcss: {
+      plugins: {},
+      preset: {
+        autoprefixer: {
+          overrideBrowserslist: ['last 3 versions', '> 1%'],
+        },
+      },
+    },
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    '@nuxtjs/tailwindcss',
     '@nuxtjs/toast',
   ],
+
+  toast: {
+    position: 'top-right',
+    duration: 5000, // 5 seconds
+    className: 'rounded py-3 px-4',
+    autoClose: false,
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -96,14 +114,5 @@ export default {
         // tokenType: 'bearer'
       },
     },
-  },
-
-  tailwindcss: {
-    cssPath: '~/assets/css/main.css',
-    configPath: 'tailwind.config.ts',
-    exposeConfig: false,
-    config: {},
-    injectPosition: 0,
-    viewer: true,
   },
 }

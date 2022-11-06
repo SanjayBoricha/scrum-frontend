@@ -1,46 +1,69 @@
 <template>
-  <div class="bg-white shadow rounded px-3 py-2 border border-white">
-    <div class="flex justify-between">
-      <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">
-        {{ task.title }}
-      </p>
+  <div class="bg-white rounded p-3 shadow-sm">
+    <p class="fw-semibold">{{ task.title }}</p>
 
-      <img
-        class="w-6 h-6 rounded-full ml-3"
-        src="https://pickaface.net/gallery/avatar/unr_sample_161118_2054_ynlrg.png"
-        alt="Avatar"
-      />
-    </div>
-    <div class="flex mt-4 justify-between items-center">
-      <span class="text-sm text-gray-600">{{ task.date }}</span>
-      <Badge v-if="task.type" :color="badgeColor">{{ task.type }}</Badge>
+    <p class="fs-14">
+      {{
+        task.description.length > 120
+          ? task.description.slice(0, 100) + '...'
+          : task.description
+      }}
+    </p>
+
+    <div class="d-flex justify-content-between align-items-end">
+      <div>
+        <span
+          class="badge rounded-pill fs-14 fw-semibold font-monospace"
+          :class="{
+            'bg-red-400': task.priority === 'high',
+            'bg-yellow-400 text-dark': task.priority === 'medium',
+            'bg-green-400': task.priority === 'low',
+          }"
+        >
+          {{ task.priority }}
+        </span>
+
+        <!-- task type badge -->
+        <span
+          class="badge rounded-pill fs-14 fw-semibold font-monospace bg-blue-400"
+        >
+          {{ task.task_type }}
+        </span>
+      </div>
+
+      <div>
+        <Avatar
+          v-if="task.assignee"
+          :username="task.assignee.name"
+          :size="32"
+          :lighten="80"
+          color="rgba(255, 255, 255, 0.8)"
+          class="float-end"
+          :custom-style="{
+            fontFamily: 'Open Sans, sans-serif',
+            fontSize: '16px',
+          }"
+        />
+      </div>
     </div>
   </div>
 </template>
-<script>
-import Badge from '~/components/Badge.vue'
-export default {
+
+<script lang="ts">
+import Vue from 'vue'
+import Avatar from 'vue-avatar'
+import { Task } from '~/interfaces/index'
+
+export default Vue.extend({
   name: 'TaskCard',
   components: {
-    Badge,
+    Avatar,
   },
   props: {
     task: {
-      type: Object,
-      default: () => ({}),
+      type: Object as () => Task,
+      required: true,
     },
   },
-  computed: {
-    badgeColor() {
-      const mappings = {
-        Design: 'purple',
-        'Feature Request': 'teal',
-        Backend: 'blue',
-        QA: 'green',
-        default: 'teal',
-      }
-      return mappings[this.task.type] || mappings.default
-    },
-  },
-}
+})
 </script>
