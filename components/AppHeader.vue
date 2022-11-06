@@ -4,7 +4,7 @@
       <nuxt-link class="navbar-brand" to="/">Scrum Board</nuxt-link>
 
       <div class="text-end d-flex align-items-center">
-        <div class="dropdown">
+        <div class="dropdown d-lg-none">
           <nuxt-link
             id="dropdownMenuButton1"
             ref="dropdownMenuButton"
@@ -68,17 +68,38 @@
       </div>
 
       <div class="text-end d-none d-lg-block">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="dropdown">
+          <nuxt-link
+            id="dropdownMenuButton1"
+            ref="dropdownMenuButton"
+            class="nav-link text-white dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            to="#"
+          >
+            <Avatar
+              :username="$auth.user.name"
+              :size="32"
+              :lighten="80"
+              color="rgba(255, 255, 255, 0.8)"
+              class="d-inline-block"
+              :custom-style="{
+                fontFamily: 'Open Sans, sans-serif',
+                fontSize: '16px',
+              }"
+            />
+            {{ $auth.user.name }}
+          </nuxt-link>
+          <ul
+            class="dropdown-menu shadow"
+            aria-labelledby="dropdownMenuButton1"
+          >
+            <li>
+              <button class="dropdown-item" @click="logout">Logout</button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </nav>
