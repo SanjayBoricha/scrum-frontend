@@ -9,4 +9,14 @@ export interface DragEvent {
     }
     newIndex: number
   }
+  removed: {
+    element: {
+      __ob__: any
+      date: string
+      id: number
+      title: string
+      type: string
+    }
+    newIndex: number
+  }
 }

@@ -1,8 +1,8 @@
 <template>
-  <main class="min-vh-100">
+  <main class="min-vh-100 bg-800">
     <AppHeader />
 
-    <div class="py-4">
+    <div class="">
       <nuxt />
     </div>
   </main>
@@ -13,14 +13,12 @@ import Vue from 'vue'
 import AppHeader from '~/components/AppHeader.vue'
 
 export default Vue.extend({
+  name: 'App',
   components: { AppHeader },
   middleware: ['auth'],
   asyncData({ $auth }) {
     $auth.onError((error) => {
       console.log(error)
-
-      // if (error.name) {
-      // }
     })
   },
 })

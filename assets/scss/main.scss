@@ -5,6 +5,13 @@ $enable-shadows: false;
 
 $input-btn-focus-box-shadow: none;
 
+// $primary: #004c9d;
+
+$white: #ebebeb;
+
+$gray-800: #262626;
+$gray-900: #1a1a1a;
+
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/maps';
@@ -47,6 +54,20 @@ $input-btn-focus-box-shadow: none;
 @import 'bootstrap/scss/helpers';
 
 // Utilities
+// $gray-1000: #000;
+
+// $grays: (
+//   '100': $gray-100,
+//   '200': $gray-200,
+//   '300': $gray-300,
+//   '400': $gray-400,
+//   '500': $gray-500,
+//   '600': $gray-600,
+//   '700': $gray-700,
+//   '800': $gray-800,
+//   '900': $gray-900,
+//   '1000': $gray-1000,
+// ) !default;
 
 $all-colors: map-merge-multiple(
   $blues,
@@ -58,7 +79,8 @@ $all-colors: map-merge-multiple(
   $yellows,
   $greens,
   $teals,
-  $cyans
+  $cyans,
+  $grays
 );
 
 $utilities: map-merge(
@@ -128,6 +150,19 @@ html,
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+
+    &-track {
+      background: var(--bs-gray-800);
+    }
+
+    &-thumb {
+      background: var(--bs-gray-600);
+      border-radius: 1rem;
+    }
+  }
 }
 
 .form-control.is-invalid:focus {
